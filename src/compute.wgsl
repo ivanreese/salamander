@@ -53,14 +53,14 @@ fn activeNeighbours(cell: vec3u) -> vec4f {
   let x = i32(cell.x);
   let y = i32(cell.y);
   return
-    state[neighbourIndex(x - 1, y + 1)] + // left   top
-    state[neighbourIndex(x + 0, y + 1)] + // center top
-    state[neighbourIndex(x + 1, y + 1)] + // right  top
-    state[neighbourIndex(x + 1, y + 0)] + // right  center
-    state[neighbourIndex(x + 1, y - 1)] + // right  bottom
-    state[neighbourIndex(x + 0, y - 1)] + // center bottom
-    state[neighbourIndex(x - 1, y - 1)] + // left   bottom
-    state[neighbourIndex(x - 1, y + 0)];  // left   center
+    state[neighbourIndex(x - 1, y + 1)] + // ↖︎
+    state[neighbourIndex(x + 0, y + 1)] + // ↑
+    state[neighbourIndex(x + 1, y + 1)] + // ↗︎
+    state[neighbourIndex(x + 1, y + 0)] + // →
+    state[neighbourIndex(x + 1, y - 1)] + // ↘︎
+    state[neighbourIndex(x + 0, y - 1)] + // ↓
+    state[neighbourIndex(x - 1, y - 1)] + // ↙︎
+    state[neighbourIndex(x - 1, y + 0)];  // ←
 }
 
 fn stateIndex(x: u32, y: u32) -> u32 {
@@ -70,21 +70,18 @@ fn stateIndex(x: u32, y: u32) -> u32 {
 @compute
 @workgroup_size(8, 8) // Must agree with WORKGROUP_SIZE in app.ts
 fn compute(@builtin(global_invocation_id) p: vec3u) {
-  // if pos.x >= canvas.w || pos.y >= canvas.h { return; }
-
   let i = f32(p.x + p.y * canvas.w);
 
-  let x = u32(random(i * clock.frame) * f32(canvas.w));
-  let y = u32(random(random(i * clock.frame)) * f32(canvas.h));
+  let x = u32(f32(canvas.w) * random(i * clock.frame));
+  let y = u32(f32(canvas.h) * random(random(i * clock.frame)));
+
   let pos = vec3u(x, y, 0u);
 
   let index = stateIndex(x, y);
 
   if pointer.down == 1. {
     if distToMouse(vec2f(pos.xy)) < 10. {
-      // if distance(pointer.p, pointer.oldP) > 0. {
-        state[index].r = 1.;
-      // }
+      state[index].r = 1.;
     }
   }
 
