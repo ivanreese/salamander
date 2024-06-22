@@ -1,0 +1,14 @@
+{
+  "name": "salamander",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Ivan Reese <ivanreese@gmail.com> (https://github.com/ivanreese)",
+  "license": "Like, Whatever",
+  "devDependencies": {
+    "@swc/core": "^1.4.8",
+    "@webgpu/types": "^0.1.40",
+    "glob": "^10.3.10",
+    "sweetbread": "^0.0.21",
+    "typescript": "^5.4.3"
+  }
+}

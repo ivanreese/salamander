@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "ES2023",
+      "DOM",
+    ],
+    "types": ["@webgpu/types"],
+    "module": "ESNext",
+    "target": "ESNext"
+  }
+}
