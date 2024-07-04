@@ -1,7 +1,9 @@
-@group(0) @binding(0) var<storage, read_write> state: array<vec4f>;
-@group(0) @binding(1) var<uniform> clock: Clock;
-@group(0) @binding(2) var<uniform> canvas: Canvas;
-@group(0) @binding(3) var<uniform> pointer: Pointer;
+@group(0) @binding(0) var sam: sampler;
+@group(0) @binding(1) var tex: texture_2d<f32>;
+@group(0) @binding(2) var<storage, read_write> state: array<vec4f>;
+@group(0) @binding(3) var<uniform> clock: Clock;
+@group(0) @binding(4) var<uniform> canvas: Canvas;
+@group(0) @binding(5) var<uniform> pointer: Pointer;
 
 struct Clock { frame: f32, dt: f32 };
 struct Canvas { w: u32, h: u32 };
