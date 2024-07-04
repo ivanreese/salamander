@@ -143,9 +143,9 @@ let time = 0
 let dt = 0
 
 function doTick(ms:number)
-  const lastWallTime = wallTime
+  const wallThen = wallTime
   wallTime = ms / 1000
-  dt = Math.min wallTime - lastWallTime, 0.1
+  dt = Math.min wallTime - wallThen, 0.1
   time += dt
   rebindBuffer clock, new Float32Array [time, dt]
   rebindBuffer pointer
